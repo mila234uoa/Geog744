@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Meena Ilamurugan</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/logo-nav.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">Lab 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Lab 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Lab 3</a>
+                    </li>
+					<li>
+						<a href="#">Lab 4</a>
+					</li>
+					<li>
+						<a href="#">Lab 5</a>
+					</li>
+					<li>
+						<a href="#">Project</a>
+					</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Geography 744 portfolio</h1>
+                <h4>A collection of lab work as part of GEOG744 produced by Meena Ilamurugan.</h4>
+            </div>
+			<div class="col-lg-12">
+				<p>The following map shows the area of Cornwall Park, Auckland and was created using Leaflet and GeoJson</p>
+			</div>
+        </div>
+    </div>
+	
+	<div class="container">
+		<div id="mapid" style="width: 120%; height: 900px;"></div>
+	</div>
+	<script>
+	var mymap = L.map('mapid').setView([-36.90488, 174.78441], 14);
+
+	L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+		maxZoom: 20,
+		attribution:  '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(mymap);
+		var Cornwall_park2 = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              174.77894067764288,
+              -36.90632304495041
+            ],
+            [
+              174.7798258066178,
+              -36.90576969907927
+            ],
+            [
+              174.7824677824974,
+              -36.90891814064229
+            ],
+            [
+              174.78408515453336,
+              -36.908143910588755
+            ],
+            [
+              174.78383839130402,
+              -36.9077857461052
+            ],
+            [
+              174.78521436452866,
+              -36.90712731958385
+            ],
+            [
+              174.78807896375656,
+              -36.90574610672425
+            ],
+            [
+              174.78836059570312,
+              -36.905587394328094
+            ],
+            [
+              174.78855371475217,
+              -36.905334311716096
+            ],
+            [
+              174.78891849517822,
+              -36.90487318445966
+            ],
+            [
+              174.78933691978455,
+              -36.905061925255026
+            ],
+            [
+              174.78971779346466,
+              -36.90455146611863
+            ],
+            [
+              174.78929936885837,
+              -36.90439275123735
+            ],
+            [
+              174.79070484638214,
+              -36.90256965122211
+            ],
+            [
+              174.79325294494632,
+              -36.89934372988088
+            ],
+            [
+              174.79245901107788,
+              -36.89917642438947
+            ],
+            [
+              174.7918474674225,
+              -36.89904772760804
+            ],
+            [
+              174.7919601202011,
+              -36.89879462330473
+            ],
+            [
+              174.792101191035,
+              -36.89827743358183
+            ],
+            [
+              174.79221761226654,
+              -36.89761488878222
+            ],
+            [
+              174.79221224784854,
+              -36.89725023987658
+            ],
+            [
+              174.79218006134033,
+              -36.89685126907795
+            ],
+            [
+              174.791938662529,
+              -36.89601042056505
+            ],
+            [
+              174.7915202379227,
+              -36.89533258695871
+            ],
+            [
+              174.7911018133164,
+              -36.89482635287025
+            ],
+            [
+              174.79056537151337,
+              -36.8942772137913
+            ],
+            [
+              174.7897338867188,
+              -36.893474948815914
+            ],
+            [
+              174.78928864002233,
+              -36.893007314539126
+            ],
+            [
+              174.789047241211,
+              -36.8927670609526
+            ],
+            [
+              174.78887021541598,
+              -36.89268554617109
+            ],
+            [
+              174.78845179080966,
+              -36.892183584808464
+            ],
+            [
+              174.78805482387546,
+              -36.89180603904443
+            ],
+            [
+              174.7873628139496,
+              -36.891132458441426
+            ],
+            [
+              174.78668689727786,
+              -36.89047174303092
+            ],
+            [
+              174.78599488735202,
+              -36.889866797283005
+            ],
+            [
+              174.78560864925385,
+              -36.88958791996925
+            ],
+            [
+              174.78515267372134,
+              -36.889364817384724
+            ],
+            [
+              174.78478789329532,
+              -36.88921894226537
+            ],
+            [
+              174.7844231128693,
+              -36.88906877641018
+            ],
+            [
+              174.78352825178342,
+              -36.888890393220926
+            ],
+            [
+              174.78322508775634,
+              -36.888802722993674
+            ],
+            [
+              174.78332278296375,
+              -36.8882426368229
+            ],
+            [
+              174.78109614886523,
+              -36.88774403325549
+            ],
+            [
+              174.78081259764215,
+              -36.8881686617354
+            ],
+            [
+              174.77966956244953,
+              -36.8879383283769
+            ],
+            [
+              174.77875569298573,
+              -36.88822779010184
+            ],
+            [
+              174.77698802947998,
+              -36.88798328301506
+            ],
+            [
+              174.77677345275882,
+              -36.88859253417272
+            ],
+            [
+              174.77647304534918,
+              -36.88918461866738
+            ],
+            [
+              174.77911755471035,
+              -36.8896482170653
+            ],
+            [
+              174.7799921035767,
+              -36.8897080518601
+            ],
+            [
+              174.78090405464172,
+              -36.88984534521812
+            ],
+            [
+              174.78131175041204,
+              -36.88991399180455
+            ],
+            [
+              174.78193402290347,
+              -36.89013280238681
+            ],
+            [
+              174.78237798058868,
+              -36.8903249165089
+            ],
+            [
+              174.7828682410259,
+              -36.89054386290104
+            ],
+            [
+              174.78341159622306,
+              -36.8908144906721
+            ],
+            [
+              174.78379180562112,
+              -36.89117941234453
+            ],
+            [
+              174.78403504379122,
+              -36.89149698949446
+            ],
+            [
+              174.78354644602703,
+              -36.892744162219294
+            ],
+            [
+              174.7830840748518,
+              -36.893134875078196
+            ],
+            [
+              174.78233034620794,
+              -36.89323654173486
+            ],
+            [
+              174.781783306195,
+              -36.89406571458123
+            ],
+            [
+              174.78089355393058,
+              -36.89569765317774
+            ],
+            [
+              174.77994382381445,
+              -36.89746902942903
+            ],
+            [
+              174.77968096733096,
+              -36.89796237611812
+            ],
+            [
+              174.77932155132297,
+              -36.89849003904717
+            ],
+            [
+              174.77892458438876,
+              -36.89917642438948
+            ],
+            [
+              174.77879583835605,
+              -36.899978629434244
+            ],
+            [
+              174.77845788002017,
+              -36.90148434982341
+            ],
+            [
+              174.77830767631534,
+              -36.90215354934842
+            ],
+            [
+              174.77815210819247,
+              -36.90277555646471
+            ],
+            [
+              174.77796435356146,
+              -36.903569144389536
+            ],
+            [
+              174.77776587009436,
+              -36.90441419921359
+            ],
+            [
+              174.77706313133245,
+              -36.90477023473812
+            ],
+            [
+              174.77641403675085,
+              -36.90510053126926
+            ],
+            [
+              174.7759419679642,
+              -36.90531929831441
+            ],
+            [
+              174.77565228939062,
+              -36.90546514266269
+            ],
+            [
+              174.77538943290716,
+              -36.90558096003479
+            ],
+            [
+              174.77484762668615,
+              -36.90587264745219
+            ],
+            [
+              174.77494955062872,
+              -36.90648175581623
+            ],
+            [
+              174.77501392364505,
+              -36.90664046635188
+            ],
+            [
+              174.7750782966614,
+              -36.90697075478649
+            ],
+            [
+              174.77515339851385,
+              -36.907283884059915
+            ],
+            [
+              174.77519631385806,
+              -36.907669932080076
+            ],
+            [
+              174.77537333965307,
+              -36.90796161151084
+            ],
+            [
+              174.77576494216927,
+              -36.90784150835087
+            ],
+            [
+              174.77685391902932,
+              -36.907215253096275
+            ],
+            [
+              174.77740645408636,
+              -36.90694930752893
+            ],
+            [
+              174.77767467498782,
+              -36.90682920277531
+            ],
+            [
+              174.77795898914346,
+              -36.9067734397897
+            ],
+            [
+              174.77894067764288,
+              -36.90632304495041
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Cornwall_park2"
+      }
+    }
+
+	
+	L.geoJson(Cornwall_park2,{
+	weight: 2.0,
+	fillOpacity: 0.7,
+	color: '#009933',
+	fillColor:'#ccffcc',
+	}).addTo(mymap);
+
+	L.marker([-36.89987, 174.7851]).addTo(mymap)
+			.bindPopup("<b>Cornwall Park</b><br />Also known as One Tree Hill").openPopup();
+	
+</script>
+	
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
