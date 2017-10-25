@@ -284,6 +284,8 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
     var layers = document.getElementById('menu');
     layers.appendChild(link);
 }
+// Add zoom and rotation controls to the map.
+mymap.addControl(new mapboxgl.NavigationControl());
 </script>
 
 	
