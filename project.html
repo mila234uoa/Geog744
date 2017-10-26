@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Meena Ilamurugan</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/logo-nav.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">Lab 1</a>
+                    </li>
+                    <li>
+                        <a href="lab2.html">Lab 2</a>
+                    </li>
+                    <li>
+                        <a href="lab3.html">Lab 3</a>
+                    </li>
+					<li>
+						<a href="lab4.html">Lab 4</a>
+					</li>
+					<li>
+						<a href="lab5.html">Lab 5</a>
+					</li>
+					<li>
+						<a href="project.html">Project</a>
+					</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Arts and Cultural Centers in Seattle, USA.</h1>
+                <h4>A collection of lab work as part of GEOG744 produced by Meena Ilamurugan.</h4>
+            </div>
+			<div class="col-lg-12">
+				<p>The following maps are created using Mapbox Studio and Geojson. Data was retrived from..  </p>
+			</div>
+        </div>
+    </div>
+	
+
+<style>
+    #menu {
+        background: #fff;
+        position: absolute;
+        z-index: 1;
+        top: 300px;
+        right: 80px;
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0,0,0,0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #menu a {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,0,0,0.25);
+        text-align: center;
+    }
+
+    #menu a:last-child {
+        border: none;
+    }
+
+    #menu a:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+
+    #menu a.active {
+        background-color: #7385c4;
+        color: #ffffff;
+    }
+
+    #menu a.active:hover {
+        background: #3074a4;
+    }
+	#fly {
+        display: block;
+        position: relative;
+        margin: 0px auto;
+        width: 50%;
+        height: 40px;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+        background: #4f6c89;
+    }
+</style>
+<br/>
+<button id='fly'>Recenter Map</button>
+<div id='mymap' class="container" style='width: 1500px; height: 1000px;'></div>
+
+<nav id="menu"></nav>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibWlsYTIzNCIsImEiOiJjajZwcG5sMDMwMXA2MzNycnVmY3h2ODEzIn0.BafqSOSPSpQz-D3HqfNmDw';
+var mymap = new mapboxgl.Map({
+    container: 'mymap',
+    style: 'mapbox://styles/mila234/cj8w69opufxbk2sroqce8a1ol',
+	zoom:'12',
+	center: [-122.311,47.587]
+});
+mymap.on('load', function() {
+
+    mymap.addSource("Studio", {
+        "type": "geojson", 
+        "data": "studio.geojson"
+    });
+    mymap.addLayer({
+        "id": "Studio",
+        "type": "symbol",
+        "source": "Studio",
+        "layout": {
+			"visibility": "visible",
+            "icon-image": "triangle-stroked-11",
+        }
+    });
+});
+mymap.on('load', function() {
+
+    mymap.addSource("Cinema", {
+        "type": "geojson", 
+        "data": "cinema.geojson"
+    });
+    mymap.addLayer({
+        "id": "Cinema",
+        "type": "symbol",
+        "source": "Cinema",
+        "layout": {
+			"visibility": "visible",
+            "icon-image": "cinema-15",
+        }
+    });
+});
+mymap.on('load', function() {
+
+    mymap.addSource("Community", {
+        "type": "geojson", 
+        "data": "community.geojson"
+    });
+    mymap.addLayer({
+        "id": "Community",
+        "type": "symbol",
+        "source": "Community",
+        "layout": {
+			"visibility": "visible",
+            "icon-image": "town-hall-11",
+        }
+    });
+});
+mymap.on('load', function() {
+
+    mymap.addSource("Arts", {
+        "type": "geojson", 
+        "data": "arts.geojson"
+    });
+    mymap.addLayer({
+        "id": "Arts",
+        "type": "symbol",
+        "source": "Arts",
+        "layout": {
+			"visibility": "visible",
+            "icon-image": "theatre-11",
+        }
+    });
+});
+mymap.on('load', function() {
+
+    mymap.addSource("Literary", {
+        "type": "geojson", 
+        "data": "literary.geojson"
+    });
+    mymap.addLayer({
+        "id": "Literary",
+        "type": "symbol",
+        "source": "Literary",
+        "layout": {
+			"visibility": "visible",
+            "icon-image": "library-11",
+        }
+    });
+});
+mymap.on('load', function() {
+
+    mymap.addSource("Multiuse", {
+        "type": "geojson", 
+        "data": "multiuse.geojson"
+    });
+    mymap.addLayer({
+        "id": "Multiuse",
+        "type": "symbol",
+        "source": "Multiuse",
+        "layout": {
+			"visibility": "visible",
+            "icon-image": "star-stroked-11",
+        }
+    });
+});
+mymap.on('load', function() {
+
+    mymap.addSource("Music", {
+        "type": "geojson", 
+        "data": "music.geojson"
+    });
+    mymap.addLayer({
+        "id": "Music",
+        "type": "symbol",
+        "source": "Music",
+        "layout": {
+			"visibility": "visible",
+            "icon-image": "music-15",
+        }
+    });
+});
+
+
+var toggleableLayerIds = [ 'Music', 'Literary', 'Arts', 'Community','Multiuse','Cinema','Studio'];
+
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+    var id = toggleableLayerIds[i];
+
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'active';
+    link.textContent = id;
+
+    link.onclick = function (e) {
+        var clickedLayer = this.textContent;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var visibility = mymap.getLayoutProperty(clickedLayer, 'visibility');
+
+        if (visibility === 'visible') {
+            mymap.setLayoutProperty(clickedLayer, 'visibility', 'none');
+            this.className = '';
+        } else {
+            this.className = 'active';
+            mymap.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+    };
+
+    var layers = document.getElementById('menu');
+    layers.appendChild(link);
+}
+// Add zoom and rotation controls to the map.
+mymap.addControl(new mapboxgl.NavigationControl())
+
+
+document.getElementById('fly').addEventListener('click', function () {
+    // Fly to a random location by offsetting the point -74.50, 40
+    // by up to 5 degrees.
+    mymap.flyTo({
+		zoom:'11',
+        center: [ -122.311,47.587]
+    })
+	});
+
+</script>
+
+	
+	
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
